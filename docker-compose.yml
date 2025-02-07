@@ -1,0 +1,20 @@
+# latest RabbitMQ 4.0.x
+#  docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:4.0-management
+
+services:
+  rabbitMq:
+    image: rabbitmq:4.0-management
+    container_name: rabbitmq-bragi
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: root
+      RABBITMQ_DEFAULT_PASS: root
+  webhook:
+    build: .
+    container_name: "BragiWebhook"
+    ports:
+      - "8000:8080"
+    restart: always
+
