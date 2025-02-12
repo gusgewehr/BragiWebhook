@@ -1,7 +1,33 @@
 name: CI Pipeline
 
-on:on:
+on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [ master ]
+
+
+defaults:
+  run:
+    working-directory: /opt/bragi/webhook/
+
+jobs:
+  build:
+    runs-on: [self-hosted]
+    steps:
+      - name: "Repo Checkout"
+        uses: actions/checkout@v3
+      - name: "Create dir"
+        run: mkdir -p /opt/bragi/webhook
+      - name: "Copy to dir"
+        run: cp -R  . /opt/bragi/webhook
+      - name: "Create env file"
+        run: |
+          touch .env
+          echo AMQP_HOST=${{env.AMQ_HOST}} > .env
+          echo AMQP_PORT=${{env.AMQ_PORT}} > .env
+          echo AMQP_USER=${{env.AMQP_USER}} > .env
+          echo AMQP_PASSWORD=${{secrets.AMQP_PASSWORD}} > .env
+          echo AMQP_QUEUE=${{env.AMQP_QUEUE}} > .env
+      - name: "Build docker Image"
+        run: AMQP_USER=${{env.AMQP_USER}} AMQP_PASS=${{secrets.AMQP_PASSWORD}}  docker compose up --build -d
+
+
