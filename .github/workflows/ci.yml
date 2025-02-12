@@ -2,12 +2,7 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [ master ]
-
-
-defaults:
-  run:
-    working-directory: /opt/bragi/webhook/
+    branches: [ main ]
 
 jobs:
   build:
@@ -20,6 +15,7 @@ jobs:
       - name: "Copy to dir"
         run: cp -R  . /opt/bragi/webhook
       - name: "Create env file"
+        working-directory: /opt/bragi/webhook/
         run: |
           touch .env
           echo AMQP_HOST=${{env.AMQ_HOST}} > .env
@@ -28,6 +24,7 @@ jobs:
           echo AMQP_PASSWORD=${{secrets.AMQP_PASSWORD}} > .env
           echo AMQP_QUEUE=${{env.AMQP_QUEUE}} > .env
       - name: "Build docker Image"
+        working-directory: /opt/bragi/webhook/
         run: AMQP_USER=${{env.AMQP_USER}} AMQP_PASS=${{secrets.AMQP_PASSWORD}}  docker compose up --build -d
 
 
