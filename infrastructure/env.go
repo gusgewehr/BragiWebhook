@@ -7,11 +7,11 @@ import (
 )
 
 type Env struct {
-	DbHost         string `mapstructure:"DB_HOST"`
-	DbPort         int    `mapstructure:"DB_PORT"`
-	DbSid          string `mapstructure:"DB_SID"`
-	DbUser         string `mapstructure:"DB_USER"`
-	DbPassword     string `mapstructure:"DB_PASSWORD"`
+	AmqpHost       string `mapstructure:"AMQP_HOST"`
+	AmqpPort       int    `mapstructure:"AMQP_PORT"`
+	AmqpUser       string `mapstructure:"AMQP_USER"`
+	AmqpPassword   string `mapstructure:"AMQP_PASSWORD"`
+	QueueName      string `mapstructure:"AMQP_QUEUE"`
 	SubscribeToken string `mapstructure:"SUBSCRIBE_TOKEN"`
 }
 

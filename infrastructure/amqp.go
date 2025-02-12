@@ -1,6 +1,7 @@
 package infrastructure
 
 import (
+	"fmt"
 	amqp "github.com/rabbitmq/amqp091-go"
 )
 
@@ -10,10 +11,10 @@ type Amqp struct {
 	Queue *amqp.Queue
 }
 
-func NewAmqp() *Amqp {
+func NewAmqp(env Env) *Amqp {
 	Amqp := &Amqp{}
 
-	conn, err := amqp.Dial("amqp://root:root@localhost:5672/")
+	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s:%d/", env.AmqpUser, env.AmqpPassword, env.AmqpHost, env.AmqpPort))
 	if err != nil {
 		panic(err)
 	}
@@ -28,12 +29,12 @@ func NewAmqp() *Amqp {
 	Amqp.Ch = ch
 
 	queue, err := ch.QueueDeclare(
-		"ReceivedMessage", // name
-		false,             // durable
-		false,             // delete when unused
-		false,             // exclusive
-		false,             // no-wait
-		nil,               // arguments
+		env.QueueName, // name
+		false,         // durable
+		false,         // delete when unused
+		false,         // exclusive
+		false,         // no-wait
+		nil,           // arguments
 	)
 	if err != nil {
 		panic(err)

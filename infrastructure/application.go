@@ -1,10 +1,11 @@
 package infrastructure
 
-import "go.uber.org/zap"
+import (
+	"go.uber.org/zap"
+)
 
 type Application struct {
 	Env    *Env
-	Db     *Orm
 	Amqp   *Amqp
 	Logger *zap.Logger
 }
@@ -17,9 +18,7 @@ func App(envPath string) *Application {
 
 	app.Env = NewEnv(envPath, app.Logger)
 
-	//app.Db = NewORM(app.Env, app.Logger)
-
-	app.Amqp = NewAmqp()
+	app.Amqp = NewAmqp(*app.Env)
 
 	return app
 }
