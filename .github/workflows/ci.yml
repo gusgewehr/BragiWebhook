@@ -9,7 +9,8 @@ jobs:
     runs-on: [self-hosted]
     steps:
       - name: "Repo Checkout"
-        uses: gusgewehr/BragiWebhook
+        uses: actions/checkout@v3
+
       - name: "Create dir"
         run: mkdir -p /opt/bragi/webhook
       - name: "Copy to dir"
