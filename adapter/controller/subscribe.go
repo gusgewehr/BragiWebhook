@@ -2,10 +2,9 @@ package controller
 
 import (
 	"BragiWebhooks/infrastructure"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"strings"
+	"strconv"
 )
 
 type SubscribeController struct {
@@ -18,7 +17,8 @@ func (sc *SubscribeController) Subscribe(ctx *gin.Context) {
 
 	if hubMode == "subscribe" || hubToken == sc.Env.SubscribeToken {
 		hubChallenge := ctx.Query("hub.challenge")
-		ctx.JSON(http.StatusOK, fmt.Sprintf("%s", strings.Replace(hubChallenge, "\\\"", "", 2)))
+		challenge, _ := strconv.Atoi(hubChallenge)
+		ctx.JSON(http.StatusOK, challenge)
 		return
 	}
 
