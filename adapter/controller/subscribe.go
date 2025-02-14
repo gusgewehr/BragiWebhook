@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strings"
 )
 
 type SubscribeController struct {
@@ -17,7 +18,7 @@ func (sc *SubscribeController) Subscribe(ctx *gin.Context) {
 
 	if hubMode == "subscribe" || hubToken == sc.Env.SubscribeToken {
 		hubChallenge := ctx.Query("hub.challenge")
-		ctx.JSON(http.StatusOK, fmt.Sprintf("%s", hubChallenge))
+		ctx.JSON(http.StatusOK, fmt.Sprintf("%s", strings.Replace(hubChallenge, "\\\"", "", 2)))
 		return
 	}
 
