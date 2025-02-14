@@ -22,11 +22,11 @@ jobs:
         working-directory: /opt/bragi/webhook/
         run: |
           touch .env
-          echo AMQP_HOST=${{env.AMQ_HOST}} > .env
-          echo AMQP_PORT=${{env.AMQ_PORT}} > .env
-          echo AMQP_USER=${{env.AMQP_USER}} > .env
-          echo AMQP_PASSWORD=${{secrets.AMQP_PASSWORD}} > .env
-          echo AMQP_QUEUE=${{env.AMQP_QUEUE}} > .env
+          echo AMQP_HOST=${{vars.AMQ_HOST}} >> .env
+          echo AMQP_PORT=${{vars.AMQ_PORT}} >> .env
+          echo AMQP_USER=${{vars.AMQP_USER}} >> .env
+          echo AMQP_PASSWORD=${{secrets.AMQP_PASSWORD}} >> .env
+          echo AMQP_QUEUE=${{vars.AMQP_QUEUE}} >> .env
       - name: "Build docker Image"
         working-directory: /opt/bragi/webhook/
         run: AMQP_USER=${{env.AMQP_USER}} AMQP_PASS=${{secrets.AMQP_PASSWORD}}  docker compose up --build -d

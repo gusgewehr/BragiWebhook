@@ -11,6 +11,8 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: ${AMQP_USER}
       RABBITMQ_DEFAULT_PASS: ${AMQP_PASS}
+    networks:
+      - bragiNet
   webhook:
     build: .
     container_name: "BragiWebhook"
@@ -19,4 +21,9 @@ services:
     restart: always
     depends_on:
       - rabbitMq
+    networks:
+      - bragiNet
+networks:
+  bragiNet:
+    driver: bridge
 

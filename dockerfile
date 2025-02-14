@@ -1,4 +1,4 @@
-FROM golang:1.22 as builder
+FROM golang:1.22 AS builder
 
 WORKDIR /app
 
@@ -11,10 +11,14 @@ RUN go build -o BragiWebhook .
 
 FROM debian:bookworm
 
+
 WORKDIR /app
 
 COPY --from=builder /app/BragiWebhook .
 COPY --from=builder /app/.env .
+
+
+
 
 EXPOSE 8080
 
