@@ -22,8 +22,8 @@ jobs:
         working-directory: /opt/bragi/webhook/
         run: |
           touch .env
-          echo AMQP_HOST=${{vars.AMQ_HOST}} >> .env
-          echo AMQP_PORT=${{vars.AMQ_PORT}} >> .env
+          echo AMQP_HOST=${{vars.AMQP_HOST}} >> .env
+          echo AMQP_PORT=${{vars.AMQP_PORT}} >> .env
           echo AMQP_USER=${{vars.AMQP_USER}} >> .env
           echo AMQP_PASSWORD=${{secrets.AMQP_PASSWORD}} >> .env
           echo AMQP_QUEUE=${{vars.AMQP_QUEUE}} >> .env
