@@ -11,8 +11,11 @@ jobs:
       - name: "Repo Checkout"
         uses: actions/checkout@v3
 
+      - name: "Remove old files"
+        run: yes | rm -Rf /opt/bragi/webhook/
       - name: "Create dir"
         run: mkdir -p /opt/bragi/webhook
+
       - name: "Copy to dir"
         run: yes | cp -Rf  . /opt/bragi/webhook
       - name: "Create env file"
