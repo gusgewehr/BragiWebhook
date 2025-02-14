@@ -7,7 +7,7 @@ import (
 )
 
 type receivedTextMessageUseCase struct {
-	ReceivedTextMessageRepository domain.ReceivedTextMessageRepository
+	ReceivedTextMessageRepository domain.ReceivedMessageRepository
 	Logger                        *zap.Logger
 }
 
@@ -21,7 +21,7 @@ func (ru *receivedTextMessageUseCase) Send(ctx *gin.Context, message domain.Rece
 	return &message, nil
 }
 
-func NewExampleUseCase(logger *zap.Logger, exampleRepository domain.ReceivedTextMessageRepository) domain.ReceivedTextMessageUseCase {
+func NewExampleUseCase(logger *zap.Logger, exampleRepository domain.ReceivedMessageRepository) domain.ReceivedMessageUseCase {
 	return &receivedTextMessageUseCase{
 		ReceivedTextMessageRepository: exampleRepository,
 		Logger:                        logger,

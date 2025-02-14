@@ -7,7 +7,7 @@ import (
 )
 
 type WebhookController struct {
-	ReceivedTextMessageUC domain.ReceivedTextMessageUseCase
+	ReceivedTextMessageUC domain.ReceivedMessageUseCase
 }
 
 func (wc *WebhookController) Webhook(ctx *gin.Context) {

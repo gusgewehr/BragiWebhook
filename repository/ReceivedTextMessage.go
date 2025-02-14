@@ -39,6 +39,6 @@ func (r *receivedTextMessageRepository) Send(ctx *gin.Context, message domain.Re
 	return &message, nil
 }
 
-func NewExampleRepository(amqp *infrastructure.Amqp, logger *zap.Logger) domain.ReceivedTextMessageRepository {
+func NewExampleRepository(amqp *infrastructure.Amqp, logger *zap.Logger) domain.ReceivedMessageRepository {
 	return &receivedTextMessageRepository{Amqp: amqp, Logger: logger}
 }

@@ -46,10 +46,10 @@ type ReceivedMessage struct {
 	} `json:"entry"`
 }
 
-type ReceivedTextMessageRepository interface {
+type ReceivedMessageRepository interface {
 	Send(ctx *gin.Context, message ReceivedMessage) (*ReceivedMessage, error)
 }
 
-type ReceivedTextMessageUseCase interface {
+type ReceivedMessageUseCase interface {
 	Send(ctx *gin.Context, message ReceivedMessage) (*ReceivedMessage, error)
 }
