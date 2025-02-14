@@ -29,6 +29,6 @@ jobs:
           echo AMQP_QUEUE=${{vars.AMQP_QUEUE}} >> .env
       - name: "Build docker Image"
         working-directory: /opt/bragi/webhook/
-        run: AMQP_USER=${{env.AMQP_USER}} AMQP_PASS=${{secrets.AMQP_PASSWORD}}  docker compose up --build -d
+        run: AMQP_USER=${{vars.AMQP_USER}} AMQP_PASS=${{secrets.AMQP_PASSWORD}}  docker compose up --build -d
 
 
