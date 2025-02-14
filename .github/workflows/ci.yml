@@ -14,7 +14,7 @@ jobs:
       - name: "Create dir"
         run: mkdir -p /opt/bragi/webhook
       - name: "Copy to dir"
-        run: cp -R  . /opt/bragi/webhook
+        run: yes | cp -Rf  . /opt/bragi/webhook
       - name: "Create env file"
         working-directory: /opt/bragi/webhook/
         run: |
