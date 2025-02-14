@@ -17,7 +17,9 @@ func (sc *SubscribeController) Subscribe(ctx *gin.Context) {
 	if hubMode == "subscribe" || hubToken == sc.Env.SubscribeToken {
 		hubChallenge := ctx.Query("hub.challenge")
 		ctx.JSON(http.StatusOK, hubChallenge)
+		return
 	}
 
 	ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid subscribe attempt"})
+	return
 }
