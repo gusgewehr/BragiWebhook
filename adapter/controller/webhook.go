@@ -11,7 +11,7 @@ type WebhookController struct {
 }
 
 func (wc *WebhookController) Webhook(ctx *gin.Context) {
-	var receivedTextMessage domain.ReceivedTextMessage
+	var receivedTextMessage domain.ReceivedMessage
 
 	err := ctx.ShouldBind(&receivedTextMessage)
 	if err != nil {

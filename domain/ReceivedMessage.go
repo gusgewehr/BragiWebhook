@@ -5,7 +5,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type ReceivedTextMessage struct {
+type ReceivedMessage struct {
 	gorm.Model
 	Object string `json:"object"`
 	Entry  []struct {
@@ -24,13 +24,21 @@ type ReceivedTextMessage struct {
 					WaId string `json:"wa_id"`
 				} `json:"contacts"`
 				Messages []struct {
+					Context struct {
+						From string `json:"from"`
+						Id   string `json:"id"`
+					} `json:"context"`
 					From      string `json:"from"`
 					Id        string `json:"id"`
 					Timestamp string `json:"timestamp"`
+					Type      string `json:"type"`
 					Text      struct {
 						Body string `json:"body"`
 					} `json:"text"`
-					Type string `json:"type"`
+					Button struct {
+						Text    string `json:"text"`
+						Payload string `json:"payload"`
+					} `json:"button"`
 				} `json:"messages"`
 			} `json:"value"`
 			Field string `json:"field"`
@@ -39,9 +47,9 @@ type ReceivedTextMessage struct {
 }
 
 type ReceivedTextMessageRepository interface {
-	Send(ctx *gin.Context, message ReceivedTextMessage) (*ReceivedTextMessage, error)
+	Send(ctx *gin.Context, message ReceivedMessage) (*ReceivedMessage, error)
 }
 
 type ReceivedTextMessageUseCase interface {
-	Send(ctx *gin.Context, message ReceivedTextMessage) (*ReceivedTextMessage, error)
+	Send(ctx *gin.Context, message ReceivedMessage) (*ReceivedMessage, error)
 }

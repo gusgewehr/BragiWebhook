@@ -14,7 +14,7 @@ type receivedTextMessageRepository struct {
 	Logger *zap.Logger
 }
 
-func (r *receivedTextMessageRepository) Send(ctx *gin.Context, message domain.ReceivedTextMessage) (*domain.ReceivedTextMessage, error) {
+func (r *receivedTextMessageRepository) Send(ctx *gin.Context, message domain.ReceivedMessage) (*domain.ReceivedMessage, error) {
 
 	body, err := json.Marshal(message)
 	if err != nil {

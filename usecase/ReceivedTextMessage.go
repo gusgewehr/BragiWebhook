@@ -11,7 +11,7 @@ type receivedTextMessageUseCase struct {
 	Logger                        *zap.Logger
 }
 
-func (ru *receivedTextMessageUseCase) Send(ctx *gin.Context, message domain.ReceivedTextMessage) (*domain.ReceivedTextMessage, error) {
+func (ru *receivedTextMessageUseCase) Send(ctx *gin.Context, message domain.ReceivedMessage) (*domain.ReceivedMessage, error) {
 
 	_, err := ru.ReceivedTextMessageRepository.Send(ctx, message)
 	if err != nil {
